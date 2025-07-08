@@ -1,0 +1,20 @@
+# Python junk
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+*.csv
+*.fits
+*.pkl
+*.parquet
+
+# Environments
+venv/
+skysurvey-env/
+
+#other repos
+
+skysurvey/
