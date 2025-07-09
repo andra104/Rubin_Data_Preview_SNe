@@ -6,7 +6,7 @@ __pycache__/
 .ipynb_checkpoints/
 .virtual_documents/
 anaconda-projects/
-anaconda_projects/
+anaconda_projects/db
 
 # Data
 *.csv
