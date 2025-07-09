@@ -4,6 +4,8 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+.virtual_documents/
+anaconda-projects/
 
 # Data
 *.csv
