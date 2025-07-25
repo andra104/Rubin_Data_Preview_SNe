@@ -1,0 +1,10 @@
+# Summary
+
+This code sets up a streamlined way to simulate populations of Type Ia supernovae (SNeIa) over a real observational footprint using Rubin’s DP1-style visit-level parquet files in combination with the skysurvey framework. The broader goal is to estimate how many SNeIa would naturally occur within the observed region, constrained by redshift and extinction, and ultimately evaluate which of those could be detected or characterized given the cadence.
+
+The key input is a parquet file that contains visit-level metadata from the [LSST ComCam—specifically or is it the Simnoyi?], right ascension, declination, MJD, filter band, and limiting magnitude for each pointing. The function `from_dp1_parquet()` ingests this file and converts it into a skysurvey.Survey object. In the process, it computes synthetic observing parameters like sky noise from the limiting magnitude, attaches a default gain and zeropoint, and prepends 'lsst' to each band name to match skysurvey conventions. Each visit is then associated with a square footprint matching ComCam’s ~40 arcminute field of view, creating a spatial tiling of observed fields.
+
+The second function, `estimate_snia_population_from_parquet()`, reconstructs the full footprint of the survey by taking the union of all visit footprints, forming a MultiPolygon sky area. It also extracts the temporal range of observations from the survey. Using this spatial and temporal information, it simulates a cosmologically distributed population of SNeIa within a given redshift slice (zmin to zmax) using the `SNeIa.from_draw()` method in the skysurvey library. Optionally, Milky Way extinction is applied using the `mw_extinction` model provided in skysurvey.effects.
+
+The result is a target object populated with synthetic SNeIa that would be expected to occur within the observed footprint and time window; whether or not they would be detected. These targets can be plotted, analyzed, and passed into future metrics to assess detectability and characterization as a function of cadence strategy.
+
